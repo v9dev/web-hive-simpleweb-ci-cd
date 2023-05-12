@@ -21,7 +21,7 @@ jobs:
 
     - name: Deploy to production
       run: |
-        ssh -i ${{ secrets.AWS_PRIVATE_KEY }} ec2-user@${{ secrets.AWS_IP_ADDRESS }} <<EOF
+        ssh -i ${{ secrets.AWS_PRIVATE_KEY }} ubuntu@${{ secrets.AWS_IP_ADDRESS }} <<EOF
         cd /var/www/myapp
         git pull
         pm2 restart myapp
