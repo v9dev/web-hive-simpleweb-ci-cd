@@ -22,9 +22,9 @@ jobs:
     - name: Deploy to AWS
       uses: appleboy/ssh-action@master
       with:
-        host: ${{ secrets.SSH_HOST }}
+        host: ${{ secrets.AWS_IP_ADDRESS }}
         username: ${{ secrets.SSH_USERNAME }}
-        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        key: ${{ secrets.AWS_PRIVATE_KEY }}
         script: |
           cd /path/to/app
           git pull origin main
