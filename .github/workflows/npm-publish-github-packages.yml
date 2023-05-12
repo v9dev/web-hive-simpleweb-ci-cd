@@ -20,10 +20,8 @@ jobs:
       run: npm test
 
     - name: Deploy to production
+      env:
+        AWS_PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY }}
+        AWS_IP_ADDRESS: ${{ secrets.AWS_IP_ADDRESS }}
       run: |
-        ssh -i ${{ secrets.AWS_PRIVATE_KEY }} ubuntu@${{ secrets.AWS_IP_ADDRESS }} <<EOF
-        cd /var/www/myapp
-        git pull
-        pm2 restart myapp
-        exit
-        EOF
+        ssh -i $AWS_PRIVATE_KEY ec2-user@$AWS_IP_ADDRESS 'cd /var/www/myapp && git pull && pm2 restart myapp'
